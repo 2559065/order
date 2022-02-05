@@ -2,10 +2,10 @@
 
 .PHONY: proto
 proto:
-	sudo docker run --rm -v $(shell pwd):$(shell pwd) -w $(shell pwd) -e ICODE=CF388DF1EF1C5EBE cap1573/cap-protoc -I ./ --micro_out=./ --go_out=./ ./proto/order/order.proto
+	protoc --proto_path=. --micro_out=. --go_out=:. proto/order/order.proto
 
 .PHONY: build
-build: 
+build:
 
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o order-service *.go
 
